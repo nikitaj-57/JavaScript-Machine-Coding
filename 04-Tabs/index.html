@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tab Component</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 90%;
+        border: 2px solid rgb(229, 234, 242);
+        border-radius: 17px;
+        margin: 2rem auto;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .tabs {
+        display: flex;
+        gap: 20px;
+        /* justify-content: center; */
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        color: rgba(74, 73, 73, 0.6);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        text-transform: uppercase;
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 10px;
+        transition: background-color 0.2s ease-in-out;
+      }
+      .tab:hover {
+        background-color: rgba(25, 118, 210, 0.1);
+      }
+      .active {
+        color: #1976d2;
+        border: 2px solid #1976d2;
+      }
+      .underLine {
+        border-top: 2px solid rgb(229, 234, 242);
+      }
+      .content .item {
+        display: none;
+        padding: 10px;
+      }
+      .content .item.active {
+        display: block;
+        border: none;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tabs">
+        <button class="tab active" data-tab="1">Item One</button>
+        <button class="tab" data-tab="2">Item Two</button>
+        <button class="tab" data-tab="3">Item Three</button>
+      </div>
+
+      <div class="underLine"></div>
+      <div class="content">
+        <p class="item active" data-tab="1">Item One</p>
+        <p class="item" data-tab="2">Item Two</p>
+        <p class="item" data-tab="3">Item Three</p>
+      </div>
+    </div>
+    <script>
+      const tabs = document.querySelectorAll(".tab");
+      const contentItems = document.querySelectorAll(".item");
+
+      function showContent(index) {
+        contentItems.forEach((item) => {
+          item.classList.remove("active");
+        });
+        contentItems[index].classList.add("active");
+      }
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((tab) => {
+            tab.classList.remove("active");
+          });
+
+          tab.classList.add("active");
+          showContent(index);
+        });
+      });
+
+      showContent(0);
+    </script>
+  </body>
+</html>
